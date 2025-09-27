@@ -770,21 +770,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 계란 이미지 업데이트
         const currentEgg = EGG_DATA[selectedEggIndex];
-        // [수정 3] currentCountStages의 랜덤 값과 비교
+        // currentCountStages의 랜덤 값과 비교
           if (clickCount === currentCountStages.crack1) {
             DOM.eggImage.src = currentEgg.crackedImages[0];
             DOM.eggStatus.textContent = "🐣 금 가기 시작했어 ! 🪓";
+            // ✅ 금이 갈 때만 소리
+            document.getElementById('eggSound_1').play();
+
         } else if (clickCount === currentCountStages.crack2) {
             DOM.eggImage.src = currentEgg.crackedImages[1];
-            DOM.eggStatus.textContent = "🐣 거의 다 왔어 ! ⛏️";
+            DOM.eggStatus.textContent = "🐣 거의 다 왔어 ! ⛏️";         
+            // ✅ 두 번째 금 소리
+            document.getElementById('eggSound_2').play();
         }
         
         // 최종 폭발
-        // [수정 4] currentCountStages의 랜덤 값과 비교
+        // currentCountStages의 랜덤 값과 비교
         if (clickCount >= currentCountStages.explode) {
             DOM.eggImage.src = FINAL_EXPLOSION_IMAGE;
             DOM.eggStatus.textContent = "🐣 스트레스 완전 박살 ! 💥";
             DOM.eggImage.style.cursor = 'default';
+
+            // 💥 깨지는 소리
+            document.getElementById('explodeSound').play();
         }
     }
 
